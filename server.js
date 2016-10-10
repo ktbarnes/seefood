@@ -13,15 +13,25 @@ app.get('*', function(req, res) {
 });
 
 app.post('/', function(req, res) {
+  console.log('inside post', req.body.food);
   request.get({
-    url: 'https://trackapi.nutritionix.com/v2/search/instant', 
-    query: req.body.query,
+    url: 'https://trackapi.nutritionix.com/v2/search/instant?query='+ JSON.stringify(req.body.food), 
     headers: config
   }, function(error, response) {
-    if (response) res.send(response.body.common[0]);
+    res.send(response.body);
+
+    // if (error) console.error(error);
+    // var stuff = '';
+    // response.on('data', function(chunk) {
+    //   stuff += chunk;
+    // });
+    // response.on('end', function() {
+    //   console.log(stuff);
+    //   response.send(stuff.common[0]);
+    // });
+    res.end();
   });
 });
 
 app.listen(process.env.PORT || 8000);
 
-module.exports = app;

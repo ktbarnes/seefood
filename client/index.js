@@ -4,8 +4,14 @@ angular.module('SeeFood',[])
   $scope.newFood = '';
 
   $scope.addFood = function() {
-    Food.addFood($scope.newFood).then(function(resp) {
-      if(resp) $scope.foods.push(resp);
+    // console.log('what up inside $scope.addFood')
+    Food.addFood($scope.newFood)
+    .then(function(resp) {
+      // console.log('inside Food.addFood');
+      if(resp) {
+        // console.log('hello',resp);
+        $scope.foods.push(resp);
+      } 
       $scope.newFood = '';
     });
   }
@@ -13,7 +19,7 @@ angular.module('SeeFood',[])
   $scope.removeFood = function(index) {
     $scope.foods.splice(index, 1)
   }
-  
+
 })
 .factory('Food', function($http) {
   return {
@@ -24,7 +30,8 @@ angular.module('SeeFood',[])
         data: {food: food}
       })
       .then (function(resp) {
-        return resp;
+        // console.log('Have resp', resp.data.common[0])
+        return {name: resp.data.common[0].food_name ,url: resp.data.common[0].photo.thumb};
       })
       .catch(function(err) {
         console.error(err);
