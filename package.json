@@ -1,0 +1,28 @@
+{
+  "name": "seefood",
+  "version": "1.0.0",
+  "description": "visual food diary",
+  "main": "index.js",
+  "dependencies": {
+    "angular": "^1.5.8",
+    "express": "^4.14.0",
+    "request": "^2.75.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ktbarnes/MKS-solo.git"
+  },
+  "keywords": [
+    "seefood"
+  ],
+  "author": "Kathryn Barnes",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ktbarnes/MKS-solo/issues"
+  },
+  "homepage": "https://github.com/ktbarnes/MKS-solo#readme"
+}
