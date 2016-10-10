@@ -1,0 +1,21 @@
+<doctype! html>
+<html ng-app='visualFood'>
+<head>
+<title>SeeFood</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js"></script>
+</head>
+<body>
+<h1>The SeeFood Diet: A Visual Food Diary</h1>
+  <div ng-controller='visualFoodController'>
+    <div id='search'>
+    <h4>Add Food Item</h4>
+      <form name='search'>
+        <label>Search: <input type='text'></label>
+      </form>
+    </div>
+    <div class='food' ng-repeat='food in foods'>
+      <div><tr><td><img src='{{food.url}}'></td><td>{{food.name}}</td></tr></div>
+    </div>
+  </div>
+</body>
+</html>
