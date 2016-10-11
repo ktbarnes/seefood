@@ -9,6 +9,14 @@ h1 {
   -webkit-text-stroke: 2px black;
 }
 
+button {
+  color: white;
+  background-color: red;
+  border-radius: 10px;
+  moz-border-radius: 10px;
+  webkit-border-radius: 10px;
+}
+
 .navigation {
   width: 100%;
   height: 40;
