@@ -3,6 +3,12 @@ body {
   font-family: cursive;
 }
 
+h1 {
+  background: url('https://sustainableexercise.files.wordpress.com/2014/07/banner_istock_000017490436smallfruit.jpg');
+  color: white;
+  -webkit-text-stroke: 2px black;
+}
+
 .navigation {
   width: 100%;
   height: 40;
