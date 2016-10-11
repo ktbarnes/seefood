@@ -1,2 +1,5 @@
 ## API keys
 config.js
+
+## Stop committing node modules
+node_modules/

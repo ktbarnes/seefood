@@ -3,21 +3,15 @@
 <head>
 <title>SeeFood</title>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-route.js"></script>
   <script src="index.js"></script>
 </head>
 <body ng-app='SeeFood'>
 <h1>The SeeFood Diet: A Visual Food Diary</h1>
-  <div ng-controller='SeeFoodController'>
-    <div id='search'>
-    <h4>Add Food Item</h4>
-      <form name='search' ng-submit='addFood()'>
-        <label>Search: <input type='text' ng-model='newFood'></label>
-        <button type='submit'>Add</button>
-      </form>
-    </div>
-        <div class='food'>
-      <div ng-repeat='($index, food) in foods' ng-click='removeFood($index)'><tr><td><img ng-src='{{food.url}}'></td><td>{{food.name}}</td></tr></div>
-    </div>
-  </div>
+<ul class='navigation'>
+  <li><a href="#/add">Add Food</a></li>
+  <li><a href='#/diary'>View Diary</a></li>
+</ul>
+<div ng-view></div>
 </body>
 </html>

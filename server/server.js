@@ -2,33 +2,30 @@ var express = require('express');
 var config = require('./config.js');
 var request = require('request');
 var bodyParser = require('body-parser');
+var foodController = require('./foodController.js');
+var mongoose = require('mongoose');
 
 var app = express();
+
+// connect to mongo database named 'seefood'
+mongoose.connect('mongodb://localhost/seefood');
 
 app.use(bodyParser.json());
 app.use(express.static('./client'));
 
-app.get('*', function(req, res) {
+app.get('/', function(req, res) {
   res.sendFile(__dirname+'/client/index.html');
 });
+
+app.get('/diary', foodController.getDiary);
 
 app.post('/', function(req, res) {
   console.log('inside post', req.body.food);
   request.get({
-    url: 'https://trackapi.nutritionix.com/v2/search/instant?query='+ JSON.stringify(req.body.food), 
+    url: 'https://trackapi.nutritionix.com/v2/search/instant?query='+JSON.stringify(req.body.food), 
     headers: config
   }, function(error, response) {
     res.send(response.body);
-
-    // if (error) console.error(error);
-    // var stuff = '';
-    // response.on('data', function(chunk) {
-    //   stuff += chunk;
-    // });
-    // response.on('end', function() {
-    //   console.log(stuff);
-    //   response.send(stuff.common[0]);
-    // });
     res.end();
   });
 });

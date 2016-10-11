@@ -1,0 +1,12 @@
+<div ng-controller='SeeFoodController'>
+  <div id='search'>
+  <h4>Add Food Item</h4>
+    <form name='search' ng-submit='addFood()'>
+      <label>Search: <input type='text' ng-model='newFood'></label>
+      <button type='submit'>Add</button>
+    </form>
+  </div>
+      <div class='food'>
+    <div ng-repeat='($index, food) in foods' ng-click='addToDiary($index)'><tr><td text-align='center'><img ng-src='{{food.url}}'></td><td>{{food.name}}</td></tr></div>
+  </div>
+</div>
