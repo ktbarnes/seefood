@@ -93,7 +93,7 @@ angular.module('SeeFood',['ngRoute'])
       method: 'GET'
     })
     .then(function(resp) {
-      console.log('inside reponse of front end getDiary ++++++ index.js', resp.data);
+      // console.log('inside reponse of front end getDiary ++++++ index.js', resp.data);
       return resp.data;
     })
     .catch(function(error) {
@@ -102,13 +102,13 @@ angular.module('SeeFood',['ngRoute'])
   }
 
   var addEntry = function(entry) {
-    console.log('adding Entry');
+    // console.log('adding Entry');
     return $http({
       url: '/diary',
       method: 'POST',
       data: entry
     }).then(function(resp) {
-      console.log("Entry Added")
+      // console.log("Entry Added")
     })
     .catch(function(error) {
       console.error(error);
@@ -116,16 +116,16 @@ angular.module('SeeFood',['ngRoute'])
   }
 
   var removeEntry = function(entry) {
-    console.log('line 119 +++++++ removingEntry', entry);
+    // console.log('line 119 +++++++ removingEntry', entry);
     return $http({
       url: '/diary',
       method: 'PUT',
       data: entry
     }).then(function(resp) {
-      console.log("Entry Deleted")
+      // console.log("Entry Deleted")
     })
     .catch(function(error) {
-      console.error(error);
+      // console.error(error);
     });
   }
 
