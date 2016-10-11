@@ -3,7 +3,7 @@ var Diary = require('./foodModel.js');
 var getDiary = function(req, res, next) {
   // console.log('inside foodController.getDiary');
   Diary.find({}, function(err, entries) {
-    console.log('finding entries inside foodController.getDiary', entries);
+    // console.log('finding entries inside foodController.getDiary', entries);
     res.json(entries);
   });
 }
@@ -17,7 +17,7 @@ var deleteEntry = function(req, res, next) {
 }
 
 var addToDiary = function(req, res, next) {
-  console.log('inside foodController.addToDiary',req.body);
+  // console.log('inside foodController.addToDiary',req.body);
   var entry = {
     name: req.body.name,
     url: req.body.url

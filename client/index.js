@@ -77,7 +77,7 @@ angular.module('SeeFood',['ngRoute'])
       var array = resp.data.common.map(function(item){
         return {name: item.food_name, url: item.photo.thumb};
       });
-      console.log(array);
+      // console.log(array);
       // return {name: resp.data.common[0].food_name, url: resp.data.common[0].photo.thumb};
       return array;
     })
@@ -87,7 +87,7 @@ angular.module('SeeFood',['ngRoute'])
   }
 
   var getDiary = function() {
-    console.log('getting Diary');
+    // console.log('getting Diary');
     return $http({
       url: '/diary',
       method: 'GET'
