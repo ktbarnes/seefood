@@ -24,6 +24,12 @@ app.use(express.static('./client'));
 
 app.get('/', function(req, res) {
   res.sendFile(__dirname+'/client/index.html');
+  res.sendFile(__dirname+'/client./styles.css');
+});
+
+app.get('/styles', function(req, res) {
+  console.log('inside');
+  res.sendFile(__dirname+'/styles.css');
 });
 
 app.get('/diary', foodController.getDiary);
