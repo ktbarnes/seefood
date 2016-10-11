@@ -16,15 +16,17 @@ angular.module('SeeFood',['ngRoute'])
 .controller('SeeFoodController', function($scope, Food) {
   $scope.foods = [];
   $scope.newFood = '';
-  $scope.entries = $scope.entries || [];
-  // $scope.entries = [];
-  console.log('line 20 +++++++ SeeFoodController',$scope.entries);
+  // $scope.entries = $scope.entries || [];
+  $scope.entries = [];
+  // console.log('line 20 +++++++ SeeFoodController',$scope.entries);
   $scope.getDiary = function() {
     Food.getDiary()
     .then(function(resp) {
       if(resp) {
-        console.log("line 26 ++++++ inside $scope.getDiary", resp);
-        $scope.diary = resp.body;
+        $scope.entries = [];
+        // console.log("line 26 ++++++ inside $scope.getDiary",resp);
+        resp.forEach(item => $scope.entries.push(item));
+        // console.log("line 28 ++++++ after assigning resp to $scope.entries",$scope.entries);
       }
     });
   }
@@ -37,7 +39,7 @@ angular.module('SeeFood',['ngRoute'])
     .then(function(resp) {
       // console.log('inside Food.addFood');
       if(resp) {
-        console.log('hello',resp);
+        // console.log('hello',resp);
         $scope.foods = $scope.foods.concat(resp);
       } 
       $scope.newFood = '';
@@ -45,18 +47,17 @@ angular.module('SeeFood',['ngRoute'])
   }
 
   $scope.addToDiary = function(index) {
-    console.log('addToDiary called');
+    // console.log('addToDiary called');
     $scope.entries.push($scope.foods[index]);
-    console.log('Adding to diary',$scope.foods[index]);
+    // console.log('Adding to diary',$scope.foods[index]);
     Food.addEntry($scope.foods[index]);
     $scope.foods = [];
   }
 
   $scope.removeFromDiary = function(index) {
-    console.log('line 43 +++++ removeFromDiary');
-    Food.removeEntry($scope.foods[index]);
+    // console.log('line 43 +++++ removeFromDiary',$scope.entries[index]);
+    Food.removeEntry($scope.entries[index]);
     $scope.entries.splice(index, 1)
-    console.log($scope.entries);
   }
 
 })
@@ -115,10 +116,10 @@ angular.module('SeeFood',['ngRoute'])
   }
 
   var removeEntry = function(entry) {
-    console.log('removingEntry');
+    console.log('line 119 +++++++ removingEntry', entry);
     return $http({
       url: '/diary',
-      method: 'DELETE',
+      method: 'PUT',
       data: entry
     }).then(function(resp) {
       console.log("Entry Deleted")
