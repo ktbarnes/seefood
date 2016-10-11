@@ -42,6 +42,7 @@ angular.module('SeeFood',['ngRoute'])
       if(resp) {
         // console.log('hello',resp);
         $scope.foods = $scope.foods.concat(resp);
+        $scope.added = 'Select food to add to diary!'
       } 
       $scope.newFood = '';
     });
