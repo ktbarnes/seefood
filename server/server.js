@@ -10,8 +10,8 @@ var app = express();
 // connect to mongo database named 'seefood'
 // 
 // 
-// mongoose.connect('mongodb://ktbarnes:4lifestar@ds011785.mlab.com:11785/heroku_s3pxlqh0');
-mongoose.connect('mongodb://localhost/seefood');
+mongoose.connect('mongodb://MONGODB_URI');
+// mongoose.connect('mongodb://localhost/seefood');
 
 app.use(bodyParser.json());
 app.use(express.static('./client'));
