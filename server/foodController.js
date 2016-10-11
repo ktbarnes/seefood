@@ -10,7 +10,12 @@ var deleteEntry = function(req, res, next) {
 
 }
 
+var addToDiary = function(req, res, next) {
+
+}
+
 module.exports = {
   getDiary: getDiary,
-  deleteEntry: deleteEntry
+  deleteEntry: deleteEntry,
+  addToDiary: addToDiary
 }

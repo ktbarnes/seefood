@@ -19,6 +19,10 @@ app.get('/', function(req, res) {
 
 app.get('/diary', foodController.getDiary);
 
+app.post('/diary', foodController.addToDiary);
+
+app.delete('/diary', foodController.deleteEntry);
+
 app.post('/', function(req, res) {
   console.log('inside post', req.body.food);
   request.get({

@@ -16,7 +16,8 @@ angular.module('SeeFood',['ngRoute'])
 .controller('SeeFoodController', function($scope, Food) {
   $scope.foods = [];
   $scope.newFood = '';
-  $scope.entries = [];
+  $scope.entries = $scope.entries || [];
+  console.log('line 20 +++++++ SeeFoodController',$scope.entries);
 
   $scope.addFood = function() {
     // console.log('what up inside $scope.addFood')
@@ -31,15 +32,17 @@ angular.module('SeeFood',['ngRoute'])
     });
   }
 
-  $scope.removeFromDiary = function(index) {
-    $scope.entries.splice(index, 1)
-  }
-
   $scope.addToDiary = function(index) {
     console.log('addToDiary called');
     $scope.entries.push($scope.foods[index]);
     console.log('Adding to diary',$scope.foods[index]);
     $scope.foods = [];
+  }
+
+  $scope.removeFromDiary = function(index) {
+    console.log('line 43 +++++ removeFromDiary');
+    $scope.entries.splice(index, 1)
+    console.log($scope.entries);
   }
 
 })
