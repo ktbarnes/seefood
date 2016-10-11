@@ -28,7 +28,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/styles', function(req, res) {
-  console.log('inside');
+  // console.log('inside');
   res.sendFile(__dirname+'/styles.css');
 });
 
