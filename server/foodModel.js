@@ -5,4 +5,4 @@ var EntrySchema = new mongoose.Schema({
   url: String
 });
 
-module.exports = mongoose.model('Diary', EntrySchema)
+module.exports = mongoose.model('Diary', EntrySchema);

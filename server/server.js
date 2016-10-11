@@ -8,6 +8,9 @@ var mongoose = require('mongoose');
 var app = express();
 
 // connect to mongo database named 'seefood'
+// 
+// 
+// mongoose.connect('mongodb://ktbarnes:4lifestar@ds011785.mlab.com:11785/heroku_s3pxlqh0');
 mongoose.connect('mongodb://localhost/seefood');
 
 app.use(bodyParser.json());
@@ -24,7 +27,7 @@ app.post('/diary', foodController.addToDiary);
 app.delete('/diary', foodController.deleteEntry);
 
 app.post('/', function(req, res) {
-  console.log('inside post', req.body.food);
+  // console.log('inside post', req.body.food);
   request.get({
     url: 'https://trackapi.nutritionix.com/v2/search/instant?query='+JSON.stringify(req.body.food), 
     headers: config

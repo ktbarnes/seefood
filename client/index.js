@@ -17,7 +17,19 @@ angular.module('SeeFood',['ngRoute'])
   $scope.foods = [];
   $scope.newFood = '';
   $scope.entries = $scope.entries || [];
+  // $scope.entries = [];
   console.log('line 20 +++++++ SeeFoodController',$scope.entries);
+  $scope.getDiary = function() {
+    Food.getDiary()
+    .then(function(resp) {
+      if(resp) {
+        console.log("line 26 ++++++ inside $scope.getDiary", resp);
+        $scope.diary = resp.body;
+      }
+    });
+  }
+
+  $scope.getDiary();
 
   $scope.addFood = function() {
     // console.log('what up inside $scope.addFood')
@@ -36,11 +48,13 @@ angular.module('SeeFood',['ngRoute'])
     console.log('addToDiary called');
     $scope.entries.push($scope.foods[index]);
     console.log('Adding to diary',$scope.foods[index]);
+    Food.addEntry($scope.foods[index]);
     $scope.foods = [];
   }
 
   $scope.removeFromDiary = function(index) {
     console.log('line 43 +++++ removeFromDiary');
+    Food.removeEntry($scope.foods[index]);
     $scope.entries.splice(index, 1)
     console.log($scope.entries);
   }
@@ -72,6 +86,7 @@ angular.module('SeeFood',['ngRoute'])
   }
 
   var getDiary = function() {
+    console.log('getting Diary');
     return $http({
       url: '/diary',
       method: 'GET'
@@ -85,8 +100,38 @@ angular.module('SeeFood',['ngRoute'])
     });
   }
 
+  var addEntry = function(entry) {
+    console.log('adding Entry');
+    return $http({
+      url: '/diary',
+      method: 'POST',
+      data: entry
+    }).then(function(resp) {
+      console.log("Entry Added")
+    })
+    .catch(function(error) {
+      console.error(error);
+    });
+  }
+
+  var removeEntry = function(entry) {
+    console.log('removingEntry');
+    return $http({
+      url: '/diary',
+      method: 'DELETE',
+      data: entry
+    }).then(function(resp) {
+      console.log("Entry Deleted")
+    })
+    .catch(function(error) {
+      console.error(error);
+    });
+  }
+
   return {
     addFood: addFood,
-    getDiary: getDiary
+    getDiary: getDiary,
+    addEntry: addEntry,
+    removeEntry: removeEntry
   }
 });
