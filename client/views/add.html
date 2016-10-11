@@ -6,7 +6,7 @@
       <button type='submit'>Add</button>
     </form>
   </div>
-      <div class='food'>
+      <div class='food'>{{added}}
     <div ng-repeat='($index, food) in foods' ng-click='addToDiary($index)'><tr><td text-align='center'><img ng-src='{{food.url}}'></td><td>{{food.name}}</td></tr></div>
   </div>
 </div>
