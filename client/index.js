@@ -110,11 +110,6 @@ angular.module('SeeFood',['ngRoute'])
       url: '/diary',
       method: 'POST',
       data: entry
-    }).then(function(resp) {
-      // console.log("Entry Added")
-    })
-    .catch(function(error) {
-      console.error(error);
     });
   }
 
@@ -124,11 +119,6 @@ angular.module('SeeFood',['ngRoute'])
       url: '/diary',
       method: 'PUT',
       data: entry
-    }).then(function(resp) {
-      // console.log("Entry Deleted")
-    })
-    .catch(function(error) {
-      // console.error(error);
     });
   }
 

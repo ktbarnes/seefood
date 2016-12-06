@@ -7,7 +7,7 @@ var mongoose = require('mongoose');
 var app = express();
 
 // connect to mongo database
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/seefood');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/visualfood');
 
 // check process.env variables
 if (!process.env['x-app-id']) var config = require('./config.js');
@@ -24,7 +24,6 @@ app.use(express.static('./client'));
 
 app.get('/', function(req, res) {
   res.sendFile(__dirname+'/client/index.html');
-  res.sendFile(__dirname+'/client./styles.css');
 });
 
 app.get('/styles', function(req, res) {
