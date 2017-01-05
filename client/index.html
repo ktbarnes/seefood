@@ -1,20 +1,18 @@
 <doctype! html>
 <html>
-<head>
-<title>SeeFood</title>
-  <link rel="stylesheet" type="text/css" href="/styles">
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-route.min.js"></script>
-  <script src="index.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/ui/live/0.5/firebase-ui-auth.js"></script>
-  <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/live/0.5/firebase-ui-auth.css" />
-</head>
-<body ng-app='SeeFood' ng-controller='SeeFoodController'>
-<h1>The SeeFood Diet: A Visual Food Diary</h1>
-<ul class='navigation'>
-  <li><a href="#/add">Add Food</a></li>
-  <li><a href='#/diary'>View Diary</a></li>
-</ul>
-<div ng-view></div>
-</body>
+  <head>
+    <title>SeeFood</title>
+    <link rel="stylesheet" type="text/css" href="style/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-route.min.js"></script>
+    <script src="index.js"></script>
+  </head>
+  <body ng-app='SeeFood'>
+    <h1>The SeeFood Diet: A Food Visualization Tool</h1>
+    <ul class='navigation'>
+      <li><a href="#/add">Add Food</a></li>
+      <li><a href='#/diary'>View Diary</a></li>
+    </ul>
+    <div ng-view></div>
+  </body>
 </html>

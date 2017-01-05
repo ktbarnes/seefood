@@ -6,7 +6,6 @@ body {
 h1 {
   background: url('https://sustainableexercise.files.wordpress.com/2014/07/banner_istock_000017490436smallfruit.jpg');
   color: white;
-  -webkit-text-stroke: 2px black;
 }
 
 button {
@@ -18,14 +17,13 @@ button {
 }
 
 .navigation {
-  width: 100%;
-  height: 40;
+  height: 40px;
   background-color: #ff2052;
 }
 
 .navigation li {
   float: left;
-  padding: 10;
+  padding: 10px;
   list-style: none;
 }
 
@@ -42,6 +40,16 @@ button {
   text-decoration: none;
   color: darkred;
 }
+
+h5 {
+  margin-top: -5px;
+  margin-bottom: 0px;
+}
+
+.item {
+  padding: 10px;
+}
+
 
 
 

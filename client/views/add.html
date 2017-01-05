@@ -1,12 +1,13 @@
-<div>
-  <div id='search'>
+<div id='search'>
   <h4>Add Food Item</h4>
-    <form name='search' ng-submit='addFood()'>
-      <label>Search: <input type='text' ng-model='newFood'></label>
-      <button type='submit'>Add</button>
-    </form>
-  </div>
-      <div class='food'>{{added}}
-    <div ng-repeat='($index, food) in foods' ng-click='addToDiary($index)'><tr><td text-align='center'><img ng-src='{{food.url}}'></td><td>{{food.name}}</td></tr></div><br/></div>
-  </div>
+  <form name='search' ng-submit='addFood()'>
+    <label>Search: <input type='text' ng-model='newFood'></label>
+    <button type='submit'>Search</button>
+  </form>
+</div>
+<div class='food'>{{added}}</div>
+<div class='item' ng-repeat='($index, food) in foods'>
+  <img ng-src='{{food.url}}'>
+  <h5>{{food.name}}</h5>
+  <button class='add' ng-click='addToDiary($index)'>Add</button>
 </div>

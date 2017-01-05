@@ -1,102 +1,113 @@
-angular.module('SeeFood',['ngRoute'])
+angular
+.module('SeeFood', ['ngRoute'])
 .config(function($routeProvider) {
+
+  // routing between the add and diary views with redirect to the add view
   $routeProvider
   .when('/add', {
     templateUrl: 'views/add.html',
-    controller: 'SeeFoodController'
+    controller: 'AddController'
   })
   .when('/diary', {
     templateUrl: 'views/diary.html',
-    controller: 'SeeFoodController'
+    controller: 'DiaryController'
   })
   .otherwise({
     redirectTo:'/add'
-  })
+  });
+
 })
-.controller('SeeFoodController', function($scope, Food) {
+.controller('AddController', function($scope, Food, Entries) {
+
+  // Message that upon search prompts user to select a food item or after selection indicates food item was added to diary
   $scope.added = '';
+
+  // Returned food items from search
   $scope.foods = [];
+
+  // ng-model for the search form in the add view
   $scope.newFood = '';
-  // $scope.entries = $scope.entries || [];
-  $scope.entries = [];
-  // console.log('line 20 +++++++ SeeFoodController',$scope.entries);
-  $scope.getDiary = function() {
-    Food.getDiary()
-    .then(function(resp) {
-      if(resp) {
-        $scope.entries = [];
-        // console.log("line 26 ++++++ inside $scope.getDiary",resp);
-        resp.forEach(item => $scope.entries.push(item));
-        // console.log("line 28 ++++++ after assigning resp to $scope.entries",$scope.entries);
-      }
-    });
-  }
 
-  $scope.getDiary();
-
+  // Searches for food item via Nutritionix API and displays results for user selection
   $scope.addFood = function() {
-    // console.log('what up inside $scope.addFood')
-    Food.addFood($scope.newFood)
-    .then(function(resp) {
-      // console.log('inside Food.addFood');
+    Food.searchFood($scope.newFood)
+    .then(function(resp) {  
       if(resp) {
-        // console.log('hello',resp);
-        $scope.foods = $scope.foods.concat(resp);
-        $scope.added = 'Select food to add to diary!'
+        $scope.foods = [].concat(resp);
+        $scope.added = 'Select food to add to diary!';
       } 
       $scope.newFood = '';
     });
   }
 
+  // Add food item as entry to cached diary (if loaded) and database
   $scope.addToDiary = function(index) {
-    // console.log('addToDiary called');
-    $scope.entries.push($scope.foods[index]);
-    // console.log('Adding to diary',$scope.foods[index]);
+    if (Entries.loadedDiary) Entries.cacheEntry($scope.foods[index]);
     Food.addEntry($scope.foods[index]);
     $scope.foods = [];
     $scope.added = 'Added to diary! View Diary to see details';
   }
 
+})
+.controller('DiaryController', function($scope, Food, Entries) {
+
+  // Array of cached diary entries retrieved if diary has already been viewed
+  if (Entries.loadedDiary()) {
+    $scope.entries = Entries.cachedDiary();
+  } else {
+  // Retrieve diary entries if diary has not yet been viewed and cache each entry
+    $scope.getDiary = function() {
+      Food.getDiary()
+      .then(function(resp) {
+        if(resp) {
+          $scope.entries = resp;
+          Entries.viewDiary();
+          $scope.entries.forEach(function(entry) {
+            Entries.cacheEntry(entry);
+          });
+        }
+      });
+    }();
+  }
+
+  // Removes entry from diary when entry in diary is clicked
   $scope.removeFromDiary = function(index) {
-    // console.log('line 43 +++++ removeFromDiary',$scope.entries[index]);
     Food.removeEntry($scope.entries[index]);
-    $scope.entries.splice(index, 1)
+    $scope.entries.splice(index, 1);
   }
 
 })
 .factory('Food', function($http) {
-  var addFood = function(food) {
+
+  // Search for food item via Nutritionix API
+  var searchFood = function(food) {
     return $http({
       url: '/',
       method: 'POST',
-      data: {food: food}
+      data: {
+        food: food
+      }
     })
     .then (function(resp) {
-      // console.log('Have resp', resp.data.common[0])
-      // Branded
-      // var array = resp.data.branded.map(function(item){
-      //   return {name: item.food_name, url: item.photo.thumb};
-      // });
-      var array = resp.data.common.map(function(item){
-        return {name: item.food_name, url: item.photo.thumb};
+      return resp.data.common.map(function(item) {
+        return {
+          name: item.food_name, 
+          url: item.photo.thumb
+        }
       });
-      // console.log(array);
-      // return {name: resp.data.common[0].food_name, url: resp.data.common[0].photo.thumb};
-      return array;
     })
-    .catch(function(err) {
-      console.error(err);
+    .catch(function(error) {
+      console.error(error);
     });
   }
 
+  // Retrieve saved food entries from database
   var getDiary = function() {
-    // console.log('getting Diary');
     return $http({
       url: '/diary',
       method: 'GET'
     })
     .then(function(resp) {
-      // console.log('inside reponse of front end getDiary ++++++ index.js', resp.data);
       return resp.data;
     })
     .catch(function(error) {
@@ -104,8 +115,8 @@ angular.module('SeeFood',['ngRoute'])
     });
   }
 
+  // Add selected food to database
   var addEntry = function(entry) {
-    // console.log('adding Entry');
     return $http({
       url: '/diary',
       method: 'POST',
@@ -113,19 +124,56 @@ angular.module('SeeFood',['ngRoute'])
     });
   }
 
+  // Remove food item entry from database
   var removeEntry = function(entry) {
-    // console.log('line 119 +++++++ removingEntry', entry);
     return $http({
-      url: '/diary',
-      method: 'PUT',
-      data: entry
+      url: '/diary/' + entry._id,
+      method: 'DELETE'
     });
   }
 
   return {
-    addFood: addFood,
+    searchFood: searchFood,
     getDiary: getDiary,
     addEntry: addEntry,
     removeEntry: removeEntry
   }
+
+})
+.factory('Entries', function() {
+  // Shared factory between add and diary views to maintain cache of diary entries so database in not queries every time view is changed to diary
+
+  // Cached entries initialized to empty array
+  var entries = [];
+
+  // Flag for whether diary has been viewed and downloaded from database
+  var loaded = false;
+
+  // Set diary has been viewed to true
+  var viewDiary = function() {
+    loaded = true;
+  }
+
+  // Returns flag for whether diary has already been viewed
+  var loadedDiary = function() {
+    return loaded;
+  }
+
+  // Add entry to cached diary
+  var cacheEntry = function(entry) {
+    entries.push(entry);
+  }
+
+  // Returns the cached diary
+  var cachedDiary = function() {
+    return entries;
+  }
+
+  return {
+    viewDiary: viewDiary,
+    loadedDiary: loadedDiary,
+    cacheEntry: cacheEntry,
+    cachedDiary: cachedDiary
+  }
+
 });
