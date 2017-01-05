@@ -1,5 +1,7 @@
 ### Objective: Build a fullstack MVP from scratch in 32 hours
 
+The MVP of this application was built within the specified timeframe. Full MEAN stack functionality and deployment was accomplished. Since then, I have made changes with future items to implement listed in the Roadmap portion of this README.
+
 # Seefood
 
 > A food visualization tool. This is a web application where users can search for food items and select food photos to add to the food visualization diary.
