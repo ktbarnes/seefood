@@ -9,7 +9,7 @@ var app = express();
 // Connect to mongo database
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/visualfood');
 
-// Check if running locally or not
+// Check if environment variables exist, if not then load API keys from config.js
 if (!process.env['x-app-id']) {
  var config = require('./config.js');
 } else {
