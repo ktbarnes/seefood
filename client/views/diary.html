@@ -1,4 +1,4 @@
-<div ng-repeat='($index, entry) in entries' ng-click='removeFromDiary($index)'>
+<div class='item' ng-repeat='($index, entry) in entries' ng-click='removeFromDiary($index)'>
   <img ng-src='{{entry.url}}'>
   <h5>{{entry.name}}</h5>
 </div>

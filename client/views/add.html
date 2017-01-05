@@ -5,10 +5,9 @@
     <button type='submit'>Search</button>
   </form>
 </div>
-<div class='food'>{{added}}
-  <form name='food' ng-repeat='($index, food) in foods' ng-submit='addToDiary($index)'>
-    <img ng-src='{{food.url}}'>
-    <h5>{{food.name}}</h5>
-    <button type='submit'>Add</button>
-  </form>
+<div class='food'>{{added}}</div>
+<div class='item' ng-repeat='($index, food) in foods'>
+  <img ng-src='{{food.url}}'>
+  <h5>{{food.name}}</h5>
+  <button class='add' ng-click='addToDiary($index)'>Add</button>
 </div>

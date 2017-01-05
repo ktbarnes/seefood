@@ -6,10 +6,10 @@ var mongoose = require('mongoose');
 
 var app = express();
 
-//connect to mongo database
+// connect to mongo database
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/visualfood');
 
-//check if running locally or not
+// check if running locally or not
 if (!process.env['x-app-id']) {
  var config = require('./config.js');
 } else {

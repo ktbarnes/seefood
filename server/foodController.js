@@ -1,11 +1,13 @@
 var Diary = require('./foodModel.js');
 
+// Retrieve food item entries from database
 var getDiary = function(req, res, next) {
   Diary.find({}, function(err, entries) {
     res.json(entries);
   });
 }
 
+// Delete food item entry from database
 var deleteEntry = function(req, res, next) {
   Diary.remove({_id: req.params.id}, function (err, resp) {
     if (err) console.error(err);
@@ -13,6 +15,7 @@ var deleteEntry = function(req, res, next) {
   });
 }
 
+// Add food item entry to database
 var addToDiary = function(req, res, next) {
   var entry = {
     name: req.body.name,
