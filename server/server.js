@@ -6,10 +6,10 @@ var mongoose = require('mongoose');
 
 var app = express();
 
-// connect to mongo database
+// Connect to mongo database
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/visualfood');
 
-// check if running locally or not
+// Check if running locally or not
 if (!process.env['x-app-id']) {
  var config = require('./config.js');
 } else {
@@ -20,6 +20,7 @@ if (!process.env['x-app-id']) {
   }
 }
 
+// Middleware to parse request body and serve up static assets
 app.use(bodyParser.json());
 app.use(express.static('./client'));
 
@@ -27,12 +28,16 @@ app.get('/', function(req, res) {
   res.sendFile(__dirname+'/client/index.html');
 });
 
+// Route to retrieve food item entries from databasae 
 app.get('/diary', foodController.getDiary);
 
+// Route to post food item entry to database
 app.post('/diary', foodController.addToDiary);
 
+// Route to delete food item entry from database
 app.delete('/diary/:id', foodController.deleteEntry);
 
+// Route to query Nutritionix API for food pictures
 app.post('/', function(req, res) {
   request.get({
     url: 'https://trackapi.nutritionix.com/v2/search/instant?query='+JSON.stringify(req.body.food), 
@@ -42,5 +47,6 @@ app.post('/', function(req, res) {
   });
 });
 
+// Start the server
 app.listen(process.env.PORT || 8000);
 

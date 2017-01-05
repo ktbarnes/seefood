@@ -2,7 +2,7 @@ angular
 .module('SeeFood', ['ngRoute'])
 .config(function($routeProvider) {
 
-  // setting up the routing between the add and diary views with redirect to the add view
+  // routing between the add and diary views with redirect to the add view
   $routeProvider
   .when('/add', {
     templateUrl: 'views/add.html',
@@ -34,7 +34,7 @@ angular
     .then(function(resp) {  
       if(resp) {
         $scope.foods = [].concat(resp);
-        $scope.added = 'Select food to add to diary!'
+        $scope.added = 'Select food to add to diary!';
       } 
       $scope.newFood = '';
     });
@@ -73,7 +73,7 @@ angular
   // Removes entry from diary when entry in diary is clicked
   $scope.removeFromDiary = function(index) {
     Food.removeEntry($scope.entries[index]);
-    $scope.entries.splice(index, 1)
+    $scope.entries.splice(index, 1);
   }
 
 })
@@ -141,6 +141,7 @@ angular
 
 })
 .factory('Entries', function() {
+  // Shared factory between add and diary views to maintain cache of diary entries so database in not queries every time view is changed to diary
 
   // Cached entries initialized to empty array
   var entries = [];
