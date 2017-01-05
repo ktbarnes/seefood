@@ -1,18 +1,13 @@
 {
   "name": "seefood",
   "version": "1.0.0",
-  "description": "visual food diary",
+  "description": "food visualization tool",
   "main": "index.js",
   "dependencies": {
     "angular": "^1.5.8",
     "angular-route": "^1.5.8",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
-    "grunt": "^1.0.1",
-    "grunt-contrib-concat": "^1.0.1",
-    "grunt-contrib-uglify": "^2.0.0",
-    "grunt-nodemon": "^0.4.2",
-    "grunt-shell": "^2.0.0",
     "mongoose": "^4.6.3",
     "request": "^2.75.0"
   },
@@ -22,15 +17,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ktbarnes/MKS-solo.git"
+    "url": "git+https://github.com/ktbarnes/seefood.git"
   },
   "keywords": [
     "seefood"
   ],
   "author": "Kathryn Barnes",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ktbarnes/MKS-solo/issues"
-  },
-  "homepage": "https://github.com/ktbarnes/MKS-solo#readme"
 }
