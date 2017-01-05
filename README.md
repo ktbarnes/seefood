@@ -28,7 +28,7 @@ npm install
 
 ## Nutrionix API
 
-Go [here]() to signup for an API key and then navigate to server/configExample.js to see how to plug API keys into a config.js file
+Go [here](https://developer.nutritionix.com/signup) to signup for an API key and then navigate to server/configExample.js to see how to plug API keys into a config.js file
 
 ## Running Locally
 
