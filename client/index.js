@@ -78,8 +78,9 @@ angular
 
 })
 .factory('Food', function($http) {
+  // Factory to send AJAX calls to the server, which the communicates with the database and the Nutritionix API
 
-  // Search for food item via Nutritionix API
+  // AJAX call to search for food item via Nutritionix API and return a map of the name and url of image
   var searchFood = function(food) {
     return $http({
       url: '/',
@@ -101,7 +102,7 @@ angular
     });
   }
 
-  // Retrieve saved food entries from database
+  // AJAX call to retrieve saved food entries from database and returns the array of data
   var getDiary = function() {
     return $http({
       url: '/diary',
@@ -115,7 +116,7 @@ angular
     });
   }
 
-  // Add selected food to database
+  // AJAX call to add selected food to database
   var addEntry = function(entry) {
     return $http({
       url: '/diary',
@@ -124,7 +125,7 @@ angular
     });
   }
 
-  // Remove food item entry from database
+  // AJAX call to remove food item entry from database
   var removeEntry = function(entry) {
     return $http({
       url: '/diary/' + entry._id,

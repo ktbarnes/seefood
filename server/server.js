@@ -1,7 +1,7 @@
 var express = require('express');
 var request = require('request');
 var bodyParser = require('body-parser');
-var foodController = require('./foodController.js');
+var diaryController = require('./diaryController.js');
 var mongoose = require('mongoose');
 
 var app = express();
@@ -29,13 +29,13 @@ app.get('/', function(req, res) {
 });
 
 // Route to retrieve food item entries from databasae 
-app.get('/diary', foodController.getDiary);
+app.get('/diary', diaryController.getDiary);
 
 // Route to post food item entry to database
-app.post('/diary', foodController.addToDiary);
+app.post('/diary', diaryController.addToDiary);
 
 // Route to delete food item entry from database
-app.delete('/diary/:id', foodController.deleteEntry);
+app.delete('/diary/:id', diaryController.deleteEntry);
 
 // Route to query Nutritionix API for food pictures
 app.post('/', function(req, res) {

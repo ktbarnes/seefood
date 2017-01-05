@@ -1,4 +1,4 @@
-var Diary = require('./foodModel.js');
+var Diary = require('./diaryModel.js');
 
 // Retrieve food item entries from database
 var getDiary = function(req, res, next) {

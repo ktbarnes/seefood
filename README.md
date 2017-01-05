@@ -26,6 +26,18 @@ From within the root directory:
 npm install
 ```
 
+## Nutrionix API
+
+Go [here]() to signup for an API key and then navigate to server/configExample.js to see how to plug API keys into a config.js file
+
+## Running Locally
+
+From within the root directory:
+
+```sh
+node server/server.js
+```
+
 ### Roadmap
 
 - Add user authentication
